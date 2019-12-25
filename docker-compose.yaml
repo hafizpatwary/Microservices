@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+
+  frontend:
+    image: frontend
+    build: ./flask_frontend/
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+
+
+  prize:
+    image: prize_service
+    build: ./flask_prize/
+
+  temperature:
+    image: temperature_service
+    build: ./flask_temperature_api/
+    environment:
+      - API_KEY=${API_KEY}
+
+  countries:
+    image: countries_service
+    build: ./flask_countries/

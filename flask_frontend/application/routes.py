@@ -7,7 +7,7 @@ import json
 @app.route('/', methods=["GET","POST"])
 def quiz():
 
-    package = requests.get('http://localhost:5000').json()
+    package = requests.get('http://prize:5000').json()
 
     prize = package["prize"]
     image = package["image"]
