@@ -3,7 +3,7 @@
 <img src="/static/flags/{{ image }}.png">
 
 
-<form name="myForm" action="" method="post" onsubmit="">
+<form name="myForm" action="{{ url_for('outcome') }}" method="post">
     {% for option in options %}
         <input type="radio" name="answer" value="{{ option['code'] }}"> {{ option['name'] }} </input><br>
     {% endfor %}

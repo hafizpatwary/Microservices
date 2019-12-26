@@ -4,8 +4,8 @@ from application.functions import get_prize
 @app.route('/', methods=["GET", "POST"])
 def prize():
 
-    country_service = 'http://localhost:5001/'
-    temperature_service = 'http://localhost:5002/'
+    country_service = 'http://countries:5000/'
+    temperature_service = 'http://temperature:5000/'
     post = get_prize(country_service, temperature_service)
 
     return post

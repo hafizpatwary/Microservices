@@ -22,8 +22,12 @@ def get_countries(jsonfile, number):
                 "name":f"{country[1]}"
                 })
 
+        flags = json_countries
+        flag = random.choice(flags)["code"]
+
         package = {
-            "countries":json_countries
+            "options":json_countries,
+            "image":flag
         }
 
     except TypeError as error:

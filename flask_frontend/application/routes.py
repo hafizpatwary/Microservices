@@ -1,26 +1,30 @@
 from application import app
-from flask import request, render_template
+from flask import request, render_template, url_for, redirect
 import requests
 import json
 
 
-@app.route('/', methods=["GET","POST"])
+@app.route('/', methods=["GET"])
 def quiz():
 
-    package = requests.get('http://localhost:5000').json()
+    response = requests.get('http://localhost:5001').json()
+    #prize = response["prize"]
+    image = response["image"]
+    quiz_options = response["options"]
 
-    prize = package["prize"]
-    image = package["image"]
-    quiz_answers = package["options"]
+    return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_options)
 
-    if request.method == 'POST':
-        if request.form['answer'] == request.form['flag']:
-            good = f"{request.form['flag']} {request.form['answer']} and {prize}"
-        else:
-            good = request.form['flag']
+@app.route('/outcome', methods=["POST"])
+def outcome():
+    response = requests.get('http://localhost:80').json()
+    prize = response["prize"]
+    if request.form['answer'] == request.form['flag']:
+        outcome = f"Correct! You are eligible for £ {prize}0 off on your next booking with YeezyJet"
+        link = "retrieve"
+    else:
+        outcome = f"Unlucky, try again by refreshing the page!"
+        link = "quiz"
 
-        return good
+    return render_template("outcome.html", outcome=outcome, link=link)
 
-
-    return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_answers)
 

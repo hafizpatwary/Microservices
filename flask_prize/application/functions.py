@@ -9,19 +9,14 @@ def get_prize(country_service, temperature_service):
             countries = countries_response.json()
             temperature = temperature_response.json()
 
-            n_countries = len(countries["countries"])
+            n_countries = len(countries["options"])
             temp = float(temperature["temperature"])
 
             prize_factor = abs(temp//(n_countries + 1))
             prize = (prize_factor * 10 + 10) if prize_factor < 5 else 40.00
 
-            flags = countries["countries"]
-            flag = random.choice(flags)["code"]
-
             data = {
-                "prize":prize,
-                "options":countries["countries"],
-                "image":flag
+                "prize":prize
             }
 
             return json.dumps(data, indent=2)
