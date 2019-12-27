@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS countries (
     `properties_key` VARCHAR(6) CHARACTER SET utf8,
     `properties_properties` VARCHAR(44) CHARACTER SET utf8
 );
-INSERT INTO countries VALUES
+INSERT INTO countries(country_id, country) VALUES
     ('AD','Andorra'),
     ('AE','United Arab Emirates'),
     ('AF','Afghanistan'),
@@ -253,7 +253,7 @@ INSERT INTO countries VALUES
     ('VU','Vanuatu'),
     ('WF','Wallis and Futuna Islands'),
     ('XK','Kosovo');
-INSERT INTO countries VALUES
+INSERT INTO countries(country_id, country) VALUES
     ('WS','Samoa'),
     ('YE','Yemen'),
     ('YT','Mayotte'),
