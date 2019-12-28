@@ -23,17 +23,15 @@ def outcome():
     response = requests.get('http://localhost:80')
 
     if response.status_code == 200:
-        prize = response.json()["prize"]
+        prize = response.json()['prize']
         answer = request.form['answer']
         flag = request.form['flag']
         correct = True if answer == flag else False
 
         if correct:
             outcome = f"Correct! You are eligible for £ {prize}0 off on your next booking with YeezyJet"
-            link = "retrieve"
         else:
             outcome = "Unlucky, try again by clicking the link below!"
-            link = "quiz"
 
         answerData = Answers(
             correct=correct,
@@ -42,8 +40,9 @@ def outcome():
         db.session.add(answerData)
         db.session.commit()
 
-        return render_template("outcome.html", outcome=outcome, link=link)
+        return render_template("outcome.html", outcome=outcome, correct=correct)
     return redirect(url_for('quiz'))
+
 
 # Store prize
 # Ask for email and store with prize

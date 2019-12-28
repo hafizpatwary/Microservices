@@ -2,5 +2,9 @@
 {% block content %}
 <h1>{{ outcome }}</h1>
 
-<a href="{{ url_for('quiz') }}"> Retrive </a>
+{% if correct %}
+    <a href="{{ url_for('quiz') }}"> Retrive </a>
+{% else %}
+    <a href="{{ url_for('quiz') }}"> Play Again </a>
+{% endif %}
 {% endblock %}
