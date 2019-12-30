@@ -7,7 +7,7 @@ import requests
 
 @app.route('/', methods=["GET"])
 def quiz():
-    response = requests.get('http://localhost:5001')
+    response = requests.get('http://countries:5000')
 
     if response.status_code == 200:
         quiz = response.json()
@@ -21,7 +21,7 @@ def quiz():
 
 @app.route('/outcome', methods=["GET","POST"])
 def outcome():
-    response = requests.get('http://localhost:80')
+    response = requests.get('http://prize:5000')
 
     if response.status_code == 200 and request.method == "POST":
         prize = response.json()['prize']

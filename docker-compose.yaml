@@ -2,22 +2,26 @@ version: "3.7"
 
 services:
 
-#  frontend:
-#    image: frontend
-#    build: ./flask_frontend/
-#    ports:
-#      - target: 80
-#        published: 80
-#        protocol: tcp
-#        mode: host
-
+  frontend:
+    image: frontend
+    build: ./flask_frontend/
+    ports:
+      - target: 5000
+        published: 80
+        protocol: tcp
+        mode: host
+    environment:
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_IP=${MYSQL_IP}
+      - SECRET_KEY=${SECRET_KEY}
 
   prize:
     image: prize_service
     build: ./flask_prize/
-    ports:
-      - target: 5000
-        published: 80
+    #ports:
+    #  - target: 5000
+    #    published: 80
 
   temperature:
     image: temperature_service
@@ -28,6 +32,6 @@ services:
   countries:
     image: countries_service
     build: ./flask_countries/
-    ports:
-      - target: 5000
-        published: 5001
+    #ports:
+    #  - target: 5000
+    #    published: 5001
