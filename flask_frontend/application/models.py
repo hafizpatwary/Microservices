@@ -2,7 +2,6 @@ from application import db
 from datetime import datetime
 
 
-
 class Prize(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     prize =  db.Column(db.Float)
@@ -32,12 +31,3 @@ class Answers(db.Model):
 
     def __repr__(self):
         return f"Correct: {self.correct} \r\nCountry: {self.country} \r\ndate: {self.date}"
-
-
-
-
-
-
-
-
-
