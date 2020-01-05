@@ -1,6 +1,6 @@
 import random, json
 
-file = 'countries.json'
+
 
 def get_countries(jsonfile, number):
     """ Choose the file from which the function can select
