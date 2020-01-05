@@ -35,10 +35,3 @@ def get_countries(jsonfile, number):
 
 
     return json.dumps(package, indent=2)
-
-
-
-
-
-
-
