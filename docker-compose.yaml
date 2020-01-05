@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - target: 80
+        published: 80
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - prize
+
+  frontend:
+    image: frontend
+    build: ./flask_frontend/
+    # ports:
+    #   - target: 5000
+    #     published: 80
+    #     protocol: tcp
+    #     mode: host
+    environment:
+      - MYSQL_USERNAME=${MYSQL_USERNAME}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_IP=${MYSQL_IP}
+      - SECRET_KEY=${SECRET_KEY}
+
+  prize:
+    image: prize_service
+    build: ./flask_prize/
+    depends_on:
+      - temperature
+      - countries
+
+  temperature:
+    image: temperature_service
+    build: ./flask_temperature_api/
+    environment:
+      - API_KEY=${API_KEY}
+
+  countries:
+    image: countries_service
+    build: ./flask_countries/

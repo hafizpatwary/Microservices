@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ outcome }}</h1>
+
+{% if correct %}
+<form name="myForm" action="{{ url_for('retrieve') }}" method="post">
+        <button type="submit" name="prize" value="{{ prize }}">Retrieve</button>
+</form>
+{% else %}
+    <a href="{{ url_for('quiz') }}"> Play Again </a>
+{% endif %}
+{% endblock %}
+
