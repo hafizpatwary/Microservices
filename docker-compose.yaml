@@ -19,9 +19,9 @@ services:
   prize:
     image: prize_service
     build: ./flask_prize/
-    #ports:
-    #  - target: 5000
-    #    published: 80
+    depends_on:
+      - temperature
+      - countries
 
   temperature:
     image: temperature_service
