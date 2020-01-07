@@ -16,7 +16,7 @@ services:
       - prize
 
   frontend:
-    image: frontend
+    image: 127.0.0.1:5000/frontend:1.0
     build: ./flask_frontend/
     # ports:
     #   - target: 5000
@@ -30,18 +30,18 @@ services:
       - SECRET_KEY=${SECRET_KEY}
 
   prize:
-    image: prize_service
+    image: 127.0.0.1:5000/prize_service:1.0
     build: ./flask_prize/
     depends_on:
       - temperature
       - countries
 
   temperature:
-    image: temperature_service
+    image: 127.0.0.1:5000/temperature_service:1.0
     build: ./flask_temperature_api/
     environment:
       - API_KEY=${API_KEY}
 
   countries:
-    image: countries_service
+    image: 127.0.0.1:5000/countries_service:1.0
     build: ./flask_countries/
