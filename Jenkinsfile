@@ -14,7 +14,7 @@ pipeline{
 
         stage('Deploy Services'){
             steps{
-                sh '''ssh jenkins@35.223.251.82 << BOB
+                sh '''ssh jenkins@35.223.251.82 << "BOB"
                         cd microservices
                         git pull
                         git checkout frontend
