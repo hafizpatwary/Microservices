@@ -31,6 +31,7 @@ pipeline{
                     docker service update --replicas 2 microservices_frontend
                     docker service update --replicas 2 microservices_prize
                     docker service update --replicas 2 microservices_temperature
+                    '''
             }
         }
 
