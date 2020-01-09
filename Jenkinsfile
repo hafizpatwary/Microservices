@@ -19,7 +19,7 @@ pipeline{
                         git pull
                         git checkout frontend
                         export BUILD_NUMBER='${BUILD_NUMBER}'
-                        docker stack deploy --compose-file docker-compose.yaml microservices
+                        docker service update --image '$(curl ifcongig.me)':5000/countries_service:${BUILD_NUMBER} microservices_countries
                         '''
             }
         }
