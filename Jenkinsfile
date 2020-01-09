@@ -20,7 +20,6 @@ pipeline{
                         git checkout frontend
                         export BUILD_NUMBER='${BUILD_NUMBER}'
                         docker stack deploy --compose-file docker-compose.yaml microservices
-                        BOB
                         '''
             }
         }
