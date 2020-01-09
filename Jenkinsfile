@@ -19,7 +19,9 @@ pipeline{
                         git pull
                         git checkout frontend
                         export BUILD_NUMBER='${BUILD_NUMBER}'
-                        docker service update --image '$(curl ifcongig.me)':5000/countries_service:${BUILD_NUMBER} microservices_countries
+                        export JENKINS_IP='$(curl ifcongig.me)'
+                        echo $JENKINS_IP
+                        docker service update --image ${JENKINS_IP}:5000/countries_service:${BUILD_NUMBER} microservices_countries
                         '''
             }
         }
