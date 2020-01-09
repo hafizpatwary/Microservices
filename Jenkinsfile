@@ -3,7 +3,7 @@ pipeline{
 
     stages{
 
-        stage(--Build Dokcer Images--){
+        stage('--Build Dokcer Images--'){
             steps{
                 sh '''. ~/.bashrc
                         docker-compose build
@@ -12,7 +12,7 @@ pipeline{
             }
         }
 
-        stage(--Deploy Services--){
+        stage('--Deploy Services--'){
             steps{
                 sh '''ssh jenkins@35.223.251.82 << BOB
                         cd microservices
