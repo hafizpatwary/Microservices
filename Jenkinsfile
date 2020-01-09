@@ -24,16 +24,5 @@ pipeline{
             }
         }
 
-        stage('Container Replicas'){
-            steps{
-                sh '''ssh jenkins@35.223.251.82 << BOB
-                    docker service update --replicas 2 microservices_countries
-                    docker service update --replicas 2 microservices_frontend
-                    docker service update --replicas 2 microservices_prize
-                    docker service update --replicas 2 microservices_temperature
-                    '''
-            }
-        }
-
     }
 }
