@@ -7,6 +7,7 @@ pipeline{
             steps{
                 sh '''. /home/jenkins/.bashrc
                         pwd
+                        echo $MYSQL_USERNAME
                         docker-compose build
                         docker-compose push
                         '''
