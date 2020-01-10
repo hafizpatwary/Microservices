@@ -6,8 +6,11 @@ pipeline{
         stage('Build Dokcer Images'){
             steps{
                 sh '''. /home/jenkins/.bashrc
-                        pwd
-                        echo $MYSQL_USERNAME
+                        export MYSQL_USERNAME=$MYSQL_USERNAME
+                        export MYSQL_PASSWORD=$MYSQL_PASSWORD
+                        export SECRET_KEY=$SECRET_KEY
+                        export MYSQL_IP=$MYSQL_IP
+                        export API_KEY=$API_KEY
                         docker-compose build
                         docker-compose push
                         '''
