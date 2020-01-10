@@ -8,6 +8,7 @@ pipeline{
                 sh '''. /home/jenkins/.bashrc
                         docker-compose build
                         docker-compose push
+                        echo ${MYSQL_USER}
                         '''
             }
         }
