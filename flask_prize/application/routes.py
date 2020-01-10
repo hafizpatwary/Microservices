@@ -1,5 +1,4 @@
 from application import app
-from application.functions import get_prize
 import requests, json, random
 
 
