@@ -1,5 +1,5 @@
 import unittest, json, pytest
-from application import app, functions
+from application import app, routes
 from flask_testing import TestCase
 from flask import url_for
 
@@ -16,7 +16,7 @@ class TestServiceFunction(TestBase):
 
     def test_get_countries(self):
 
-        countries_json = functions.get_countries('./application/countries.json', 4)
+        countries_json = routes.get_countries('./application/countries.json', 4)
         countries = json.loads(countries_json)
 
         number_of_countries = len(countries["options"])
@@ -26,7 +26,7 @@ class TestServiceFunction(TestBase):
     def test_get_countries_exception(self):
 
         with pytest.raises(Exception):
-            assert functions.get_countries('./countries.json', 4)
+            assert routes.get_countries('./countries.json', 4)
 
 
 class TestServiceRoutes(TestBase):

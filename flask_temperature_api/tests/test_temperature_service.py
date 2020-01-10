@@ -1,5 +1,5 @@
 import unittest, json, pytest
-from application import app, functions
+from application import app, routes
 from flask_testing import TestCase
 from os import getenv
 from flask import url_for
@@ -19,7 +19,7 @@ class TestServiceFunction(TestBase):
 
         cities = {"Manchester":"2643123", "London":"2643741"}
 
-        temperature_json = functions.get_temerature(cities, getenv('API_KEY'))
+        temperature_json = routes.get_temerature(cities, getenv('API_KEY'))
         temperature = json.loads(temperature_json)
         temperature_degree = float(temperature["temperature"])
 
