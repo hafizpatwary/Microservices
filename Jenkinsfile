@@ -24,7 +24,7 @@ pipeline{
                         '''
             }
         }
-
+        /*
         stage('Container Replicas'){
             steps{
                 sh '''ssh jenkins@35.223.251.82 << BOB
@@ -36,6 +36,6 @@ pipeline{
                     '''
             }
         }
-
+        */
     }
 }
