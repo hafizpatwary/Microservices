@@ -11,11 +11,11 @@ pipeline{
                         '''
             }
         }
-        
-        
+
+
         stage('Deploy Services'){
             steps{
-                sh '''ssh jenkins@35.223.251.82 << BOB
+                sh '''ssh -o StrictHostKeyChecking=no swarm << BOB
                         export BUILD_NUMBER='${BUILD_NUMBER}'
                         docker service update --replicas 3 --image 35.228.228.71:5000/countries_service:build-${BUILD_NUMBER} microservices_countries
                         docker service update --replicas 2 --image 35.228.228.71:5000/frontend_service:build-${BUILD_NUMBER} microservices_frontend
