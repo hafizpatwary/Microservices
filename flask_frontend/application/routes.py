@@ -23,25 +23,27 @@ def quiz():
 def outcome():
     response = requests.get('http://prize:5000')
 
-    if response.status_code == 200 and request.method == "POST":
-        prize = response.json()['prize']
-        answer = request.form['answer']
-        flag = request.form['flag']
-        correct = True if answer == flag else False
+    if 'answer' in request.form:
 
-        if correct:
-            outcome = f"Correct! You are eligible for £ {prize}0 off on your next booking with YeezyJet"
-        else:
-            outcome = "Unlucky, try again by clicking the link below!"
+        if response.status_code == 200 and request.method == "POST":
+            prize = response.json()['prize']
+            answer = request.form['answer']
+            flag = request.form['flag']
+            correct = True if answer == flag else False
 
-        answerData = Answers(
-            correct=correct,
-            flag=Countries.query.get_or_404(flag)
-            )
-        db.session.add(answerData)
-        db.session.commit()
+            if correct:
+                outcome = f"Correct! You are eligible for £ {prize}0 off on your next booking with YeezyJet"
+            else:
+                outcome = "Unlucky, try again by clicking the link below!"
 
-        return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize)
+            answerData = Answers(
+                correct=correct,
+                flag=Countries.query.get_or_404(flag)
+                )
+            db.session.add(answerData)
+            db.session.commit()
+
+            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize)
     return redirect(url_for('quiz'))
 
 
