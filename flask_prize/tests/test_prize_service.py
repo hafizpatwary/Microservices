@@ -54,19 +54,17 @@ def mocked_requests_get(*args, **kwargs):
     return MockResponse(None, 404)
 
 
-class TestServiceFunction(TestBase):
+class TestQuizFunction(TestBase):
 
 	# To patch 'requests.get' with our own method. The mock object is passed in to our test case method.
 	@mock.patch('requests.get', side_effect=mocked_requests_get)
-	def test_get_prize(self, mock_get):
-		country_service = 'http://countries:5000/'
-		temperature_service = 'http://temperature:5000/'
+	def test_quiz_route(self, mock_get):
+        """ Test login required to create diet """
 
-		prize_json = routes.get_prize(country_service, temperature_service)
-		prize = json.loads(prize_json)
-		prize_money = float(prize["prize"])
+        target_url = url_for('quiz')
+        response = self.client.get(target_url)
 
-		self.assertTrue(prize_money >= 0)
+        self.assertEqual(response.status_code, 200)
 
 	def test_get_countries_exception(self):
 		
