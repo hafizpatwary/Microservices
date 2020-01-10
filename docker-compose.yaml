@@ -16,7 +16,7 @@ services:
       - prize
 
   frontend:
-    image: 35.228.228.71:5000/frontend:${BUILD_NUMBER}
+    image: 35.228.228.71:5000/frontend_service:${BUILD_NUMBER}
     build: ./flask_frontend/
     # ports:
     #   - target: 5000
