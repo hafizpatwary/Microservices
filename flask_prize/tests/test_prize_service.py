@@ -1,6 +1,6 @@
 import unittest, json, pytest, requests
 from unittest import mock
-from application import app, functions
+from application import app, routes
 from flask_testing import TestCase
 from flask import url_for
 
@@ -62,7 +62,7 @@ class TestServiceFunction(TestBase):
 		country_service = 'http://countries:5000/'
 		temperature_service = 'http://temperature:5000/'
 
-		prize_json = functions.get_prize(country_service, temperature_service)
+		prize_json = routes.get_prize(country_service, temperature_service)
 		prize = json.loads(prize_json)
 		prize_money = float(prize["prize"])
 
@@ -71,7 +71,7 @@ class TestServiceFunction(TestBase):
 	def test_get_countries_exception(self):
 		
 		with pytest.raises(Exception):
-			assert functions.get_prize('http://countries:5000/', 'http://temperature:5000/')
+			assert routes.get_prize('http://countries:5000/', 'http://temperature:5000/')
 
 
 class TestServiceRoutes(TestBase):
