@@ -71,7 +71,7 @@
     - name: 
       copy:
         dest: /etc/docker/daemon.json
-        content: '{"insecure-registries" : ["jenkins-v2:5000"]}'
+        content: '{"insecure-registries" : ["jenkins:5000"]}'
 
     - name: Realod Docker
       systemd:
