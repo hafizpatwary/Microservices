@@ -5,7 +5,7 @@ pipeline{
 
         stage('Build Dokcer Images'){
             steps{
-                sh '''. ~/.bashrc
+                sh '''. /home/jenkins/.bashrc
                         docker-compose build
                         docker-compose push
                         '''
