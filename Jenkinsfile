@@ -6,8 +6,6 @@ pipeline{
         stage('Build Dokcer Images'){
             steps{
                 sh '''. /home/jenkins/.bashrc
-                        echo ${MYSQL_USER}
-                        $(whoami)
                         pwd
                         docker-compose build
                         docker-compose push
