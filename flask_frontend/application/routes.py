@@ -45,7 +45,7 @@ def outcome():
             db.session.add(answerData)
             db.session.commit()
 
-            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=prize["city"], temperature=prize["temperature"]))
+            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=prize["city"], temperature=prize["temperature"])
     return redirect(url_for('quiz'))
 
 
