@@ -7,15 +7,17 @@ import requests
 
 @app.route('/', methods=["GET"])
 def quiz():
-    response = requests.get('http://countries:5000')
+    try:
+        response = requests.get('http://countries:5000')
 
-    if response.status_code == 200:
-        quiz = response.json()
-        image = quiz['image']
-        quiz_options = quiz['options']
+        if response.status_code == 200:
+            quiz = response.json()
+            image = quiz['image']
+            quiz_options = quiz['options']
 
-        return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_options)
-    return "Not OK"
+            return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_options)
+    except:
+        return "Loading..."
 
 
 
@@ -43,7 +45,7 @@ def outcome():
             db.session.add(answerData)
             db.session.commit()
 
-            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize)
+            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=prize["city"], temperature=prize["temperature"])
     return redirect(url_for('quiz'))
 
 
