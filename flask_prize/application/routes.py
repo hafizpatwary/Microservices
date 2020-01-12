@@ -12,15 +12,16 @@ def get_prize(country_service, temperature_service):
             temperature = temperature_response.json()
 
             n_countries = len(countries["options"])
-            temp = float(temperature["temperature"])/1
+            temp = float(temperature["temperature"])
 
             prize_factor = abs(temp//(n_countries + 1))
             prize = (prize_factor * 10 + 10) if prize_factor < 5 else 90.00
 
+            temperature_packaged = "{0:0.1f}".format(temp)
             data = {
                 "prize":f"{str(prize)}",
                 "city":f"{temperature['city']}",
-                "temperature":f"{str(temp)}"
+                "temperature":f"{temperature_packaged}"
             }
 
             return json.dumps(data, indent=2)
