@@ -20,7 +20,7 @@ def get_prize(country_service, temperature_service):
             data = {
                 "prize":prize,
                 "city":f"{temperature['city']}",
-                "temperature":f"{temp}"
+                "temperature":f"{str(temp)}"
             }
 
             return json.dumps(data, indent=2)
