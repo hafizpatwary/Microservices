@@ -18,13 +18,14 @@ def get_prize(country_service, temperature_service):
             prize = (prize_factor * 10 + 10) if prize_factor < 5 else 90.00
 
             data = {
-                "prize":prize
+                "prize":prize,
+                "city":f"{temperature["city"]}"
             }
 
             return json.dumps(data, indent=2)
 
         else:
-            exception = f"""Countries service response: {countries_response.status_code} 
+            exception = f"""Countries service response: {countries_response.status_code}
             \nTemperature service response: {temperature_response.status_code}"""
             raise Exception(exception)
 
