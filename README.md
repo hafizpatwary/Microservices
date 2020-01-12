@@ -132,23 +132,33 @@ Jenkins job:
 * Orchestration: Docker-compose
 
 <a name="testing"></a>
-### Testing
+## Testing
+Testing has been done using pytest. The coverage report for the services overall is 92%.
+The breakdown of test coverage for each service is reported below with explanation wherever is necessary.
+### Test for Service 2 (Contry Genarator)
+
 <img src="/Documentation/countries_test_cov.png" alt="countries_test_cov" width="80%" height="80%" border="5"/>
-<img src="/Documentation/prize_test_cov.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
-<img src="/Documentation/prize_routes.png" alt="prize_routes" width="80%" height="80%" border="5"/>
+
+### Test for Service 3 (Temperature)
 <img src="/Documentation/temperature_api_test.png" alt="temperature_api_test" width="80%" height="80%" border="5"/>
+
+### Test for Service 4 (Vouhcer Generator)
+<img src="/Documentation/prize_test_cov.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
+
+### Test for Service 1 (Frontend)
 <img src="/Documentation/frontend_test_cov.png" alt="frontend_test_cov" width="80%" height="80%" border="5"/>
-<img src="/Documentation/frontend_models.png" alt="frontend_models" width="80%" height="80%" border="5"/>
 
 
 <a name="user_sotry"></a>
 ### Project planning and user stories
-<a name="use_case"></a>
+Project tracking was done using a trello board. Below the before and after of the project.
+<img src="/Documentation/trello_before.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/trello_after.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
 <a name="uml"></a>
 ### UML diagram
 
 <a name="improve"></a>
 ## Improvements for the Future
-
-
-service 2 accepts parameter of number of question
+* Currenlty the job running on Jenkins takes about two minutes, to run. I can shave about 10 seconds, by making jenkins cloning down only whatever is necessary for deplyment. Hence, ignoring file such as documentation, images and other unused codes.
+* In Ansible configuration I would break down the task in smaller files and making them more generic so that I can use them in the futrure for other projects.
+* I would make an SQL container, rather than using a production ready database from GCP. I would save time during development and save gcp credit
