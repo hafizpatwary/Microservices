@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>{{ outcome }}</h1>
+<h2>Service 3: The temperature in {{ city }} is {{ temperature }} C. </h2>
 
 {% if correct %}
 <form name="myForm" action="{{ url_for('retrieve') }}" method="post">
