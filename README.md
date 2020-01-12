@@ -30,34 +30,35 @@ The aims of the project are as follows:
 
 * Create a service ortiented web-application, that is comprised of at least four services. Each service must have two different implementation that can be swapped between them without disrupting the user experience.
 * Build a CI pipeline using Jenkins that automatically updates and deploys the web-app when source code is updated.
-* Create ansible playbook to automate configuation of resourese (VMs) required for this project
+* Create ansible playbook to automate configuation of resources (VMs) required for this project
 
 ## Solution
 
-For my web application I decided to create a quiz game. The app presents the user a randomly generated flag, where the user has to guess which country doesthe flag belong to based on a multiple choice question.
-If the country that belongs to the flag is guessed correctly, the user is rewarded with a voucher for a plane ticket.
+For my web application I decided to create a quiz game. The app presents the user a randomly generated flag, where the user has to guess which country the flag belongs to based on a multiple choice question.
+If the user guesses correctly, the user is rewarded with a voucher for a plane ticket.
 <a name="architecture"></a>
 ### Architecture
-To create the app, the service were as follow:
+To create the app, the services architecture is shown below:
 <a name="microservices"></a>
 <img src="/Documentation/microservice_architecture.png" alt="Microservice architecture" />
 
 #### Country generator service:
-   * This service essentianlly genearates the question that will be shown on the frontend. To create the multiple choice question, it generates a random list of unique countires from a josn file. Once the selection has been done, it parses a json package with the countires and a flag from one of those countries.
+   * This service essentially generates the question that will be shown on the frontend. To create the multiple choice question, it generates a random list of unique countires from a json file. Once the selection has been done, it parses a json package with the countries and a flag from one of those countries.
+
 #### Temperature api service:
-  * This service selects a random city from a list of cities and makes an api call to openweathermap.com to get the current temperature. The repsponse is decoded and then parsed to the desired JSON format to be used by service 4.
+  * This service selects a random city from a list of cities and makes an api call to openweathermap.com to get the current temperature. The response is decoded and then parsed to the desired JSON format to be used by service 4.
 
 #### Voucher generator service:
-  * Combines the JSON objects recieved from service 2 and 3 with some logic to create a voucher. The current logic set is to genereate a prize based on number of options, set in the quiz, and the current weather.
+  * Combines the JSON objects recieved from service 2 and 3 with some logic to create a voucher. The current logic set is to generate a prize based on number of options, set in the quiz, and the current weather.
 
 #### Frontend service:
-  * This is the service that the user will be intercating with. The frontend uses the country service to retieve the flag quiz. Upon submission of quiz, if the answer is correct, the forntend then proceeds to make a get request to the voucher service to reward the user. Addionally it also perist some data to an SQL database, such as the response of the user to the question and user's email address used to retrieve the voucher.
+  * This is the service that the user will be interacting with. The frontend uses the country service to retrieve the flag quiz. Upon submission of quiz, if the answer is correct, the forntend then proceeds to make a get request to the voucher service to reward the user. Additionally it also persist some data to an SQL database, such as the response of the user to the question and user's email address used to retrieve the voucher.
 <a name="erd"></a>
 ### Entity Relationship Diagrams
 ![Entity RelationShip diagram](/Documentation/database_architecture.png)
 
 Altough having an entity relationship diagram was not a requirement for this project, it was useful to revise some database concepts and practice SQLAlchemy's syntax.
-The tables above are used by the frontend to store the answer to the quiz given by the user and email address given to retrieve voucher.
+The tables above are used by the frontend to store the answer to the quiz given by the user and email address given to retrieve the voucher.
 
 <a name="risks" ></a>
 ## Risk Assessment
@@ -74,18 +75,19 @@ The tables above are used by the frontend to store the answer to the quiz given 
 <a name="api"></a>
 #### Uploading API key to GitHub
 Service three retrieves the temperature of a random city by making an api request to openweathermap.com.
-The website let's me retieve the data required for this project for free, however there also paid services which requires my API key. When writing source code I might upload these key on GitHub my midateks:
+The website lets the application retrieve the data required for this project for free, however there also paid services which requires the API key. When writing source code I might upload these keys on GitHub my mistake:
 Solution:
 + Set the API key as an enviorment variable
 <a name="sql"></a>
-#### External database manipulationb
-During development it is likely that I will be working on different machines, hence there will be a public Git repo. It is very likely that I may upload some credentils by mistake
+#### External database manipulation
+During development it is likely that I will be working on different machines, hence there will be a public Git repo. It is very likely that I may upload some credentials by mistake
+
 Solution:
-* Set enviornmental variables so that crednetials can be accesed by one person only
+* Set enviornmental variables so that credentials can be accesed by one person only
 * Delete credentials if you know someone else might use the same machine
 <a name="automation"></a>
 #### Automation causing issues
-Automation can save a lot of time and hussle if done right, however if not done properly it can:
+Automation can save a lot of time and hassle if done right, however if not done properly it can:
 * When writing Ansible playbook, it is important to write them as versatile as possible, like not having the host name hardcoded but instead one that varies automatically.
 
 Solution:
@@ -93,25 +95,25 @@ Solution:
 * Do not automate a task that is not repetitive, such as setting environmental variables
 <a name="container"></a>
 #### Container losing data when VM stopped
-It is important to realise that when a VM is stopped, the docker containers exit. On restart of VM the containers can also be restarted, however they won't be the same as before.
+It is important to realise that when a VM is stopped, the docker containers exit. On restart of VM, the containers can also be restarted, however they won't be the same as before.
 Solution:
 * Set container to the option "--restart=always"
 * Set volumes to the container
 <a name="borken_code"></a>
 #### Website malfunctions because code is broken
-* Alaways test before pushing code
+* Always test before pushing code
 * Set up a test enviornment
 <a name="depl" ></a>
 ## Deployment
-The test and deployment process for the web app was automated using Jenkins, a CI server. Jenkins run in a GCP instance that automatically deploys the webapp into deployment server, with a webhook to GitHub which is triggered with every push event.
-Ansible was used to create VMs with the correct configuration, to automate the process of setting environemtns for production and CI server
+The test and deployment process for the web app was automated using Jenkins, a CI server. Jenkins runs in a GCP instance that automatically deploys the webapp into deployment server, with a webhook to GitHub which is triggered with every push event.
+Ansible was used to create VMs with the correct configuration, to automate the process of setting environmetns for production and CI server.
 
 Jenkins job:
-* Once code is pushed to GitHub, Jenkins is tirggered
+* Once code is pushed to GitHub, Jenkins is triggered
 * Jenkins downloads executable Jenkinsfile
 * It run an automated test on the code
-* Build images form yaml file and pushes image to local repo
-* Pulls image down on Deplyment server and makes a rolling update.
+* Build images from yaml file and pushes image to local repo
+* Pulls image down on Deployment server and makes a rolling update.
 <img src="/Documentation/CI_pipeline.png" alt="CI Pipeline" />
 
 <a name="tech"></a>
@@ -158,6 +160,6 @@ Project tracking was done using a trello board. Below the before and after of th
 
 <a name="improve"></a>
 ## Improvements for the Future
-* Currenlty the job running on Jenkins takes about two minutes, to run. I can shave about 10 seconds, by making jenkins cloning down only whatever is necessary for deplyment. Hence, ignoring file such as documentation, images and other unused codes.
-* In Ansible configuration I would break down the task in smaller files and making them more generic so that I can use them in the futrure for other projects.
+* Currently the job running on Jenkins takes about two minutes, to run. Time can be reduced by about 10 seconds, by making jenkins cloning down only what is necessary for deplyment. Hence, ignoring file such as documentation, images and other unused code.
+* In Ansible configuration I would break down the task in smaller files and making them more generic so that I can use them in the future for other projects.
 * I would make an SQL container, rather than using a production ready database from GCP. I would save time during development and save gcp credit
