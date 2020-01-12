@@ -10,7 +10,7 @@
     {% for option in options %}
         <input type="radio" name="answer" value="{{ option['code'] }}"> {{ option['name'] }} </input><br>
     {% endfor %}
-        <!--<input type="submit" name="flag" value="{{ png }}">-->
+        <br>
         <button type="submit" name="flag" value="{{ png }}">Submit answer</button>
 </form>
 {% endblock %}
