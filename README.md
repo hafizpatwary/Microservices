@@ -40,7 +40,7 @@ If the country that belongs to the flag is guessed correctly, the user is reward
 ### Architecture
 To create the app, the service were as follow:
 <a name="microservices"></a>
-<img src="/Documentation/microservice_architecture.png" alt="Microservice architecture" width="80%" height="80%" border="5"/>
+<img src="/Documentation/microservice_architecture.png" alt="Microservice architecture" />
 
 #### Country generator service:
    * This service essentianlly genearates the question that will be shown on the frontend. To create the multiple choice question, it generates a random list of unique countires from a josn file. Once the selection has been done, it parses a json package with the countires and a flag from one of those countries.
@@ -71,7 +71,6 @@ The tables above are used by the frontend to store the answer to the quiz given 
 
 
 <a name="risks_expl" ></a>
-a name="risks_expl" ></a>
 <a name="api"></a>
 #### Uploading API key to GitHub
 Service three retrieves the temperature of a random city by making an api request to openweathermap.com.
@@ -113,7 +112,7 @@ Jenkins job:
 * It run an automated test on the code
 * Build images form yaml file and pushes image to local repo
 * Pulls image down on Deplyment server and makes a rolling update.
-<img src="/Documentation/CI_pipeline.png" alt="CI Pipeline" width="80%" height="80%" border="5"/>
+<img src="/Documentation/CI_pipeline.png" alt="CI Pipeline" />
 
 <a name="tech"></a>
 ### Technologies Used
