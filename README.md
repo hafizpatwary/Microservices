@@ -64,12 +64,12 @@ The tables above are used by the frontend to store the answer to the quiz given 
 | Risks                            | Likelihood    | Impact       |    Explanation          |
 | -------------------------------- |:-------------:| :-----------:| -----------------------:|
 | Uploading API key to GitHub      | High          | High         | [1 Click here](#api)
-| External database manipulation   | Medium        | High/Moderate | [2 Click here](#sql)
+| External database manipulation   | Medium        | High         | [2 Click here](#sql)
 | Automation causing issues        | Medium        | High         | [3 Click here](#automation)
 | Container losing data when VM stopped | High     | High         | [4 Click here](#container)
-| Website malfunctions because code is broken |  Medium     |    High       | [5 Click here](#borken_code)
+| Website malfunctions because code is broken |  Medium | High    | [5 Click here](#borken_code)
 
-automation debian and ubuntu vm
+
 <a name="risks_expl" ></a>
 a name="risks_expl" ></a>
 <a name="api"></a>
@@ -87,8 +87,8 @@ Solution:
 <a name="automation"></a>
 #### Automation causing issues
 Automation can save a lot of time and hussle if done right, however if not done properly it can:
-* Slow down development time, if the script witten is full of bug. e.g. Jenkins script not cloning down the correct repo, might take time to debug the problem
 * When writing Ansible playbook, it is important to write them as versatile as possible, like not having the host name hardcoded but instead one that varies automatically.
+
 Solution:
 * Automate only repetitive tasks such as deployment
 * Do not automate a task that is not repetitive, such as setting environmental variables
@@ -99,13 +99,9 @@ Solution:
 * Set container to the option "--restart=always"
 * Set volumes to the container
 <a name="borken_code"></a>
-#### Running out of GCP credit
-It is unlikely that I will run out of GCP credit for this project, however it is still a possibility if:
-* Leaving multiple instance up and running
-* Leaving multiple database open can eat credit very quickly
-Solution:
-* Run manual test in development enviornment
-* Set Jenkins to run automated tests, before it builds and deployes
+#### Website malfunctions because code is broken
+* Alaways test before pushing code
+* Set up a test enviornment
 <a name="depl" ></a>
 ## Deployment
 The test and deployment process for the web app was automated using Jenkins, a CI server. Jenkins run in a GCP instance that automatically deploys the webapp into deployment server, with a webhook to GitHub which is triggered with every push event.
@@ -134,14 +130,21 @@ Jenkins job:
 * Containerization: Docker
 * Configuration Management: Ansible
 * Orchestration: Docker-compose
+
 <a name="testing"></a>
 ### Testing
+<img src="/Documentation/countries_test_cov.png" alt="countries_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/prize_test_cov.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/prize_routes.png" alt="prize_routes" width="80%" height="80%" border="5"/>
+<img src="/Documentation/temperature_api_test.png" alt="temperature_api_test" width="80%" height="80%" border="5"/>
+<img src="/Documentation/frontend_test_cov.png" alt="frontend_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/frontend_models.png" alt="frontend_models" width="80%" height="80%" border="5"/>
+
 
 <a name="user_sotry"></a>
 ### Project planning and user stories
 <a name="use_case"></a>
 <a name="uml"></a>
-### Use case diagram
 ### UML diagram
 
 <a name="improve"></a>
