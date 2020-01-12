@@ -32,7 +32,9 @@ def outcome():
             answer = request.form['answer']
             flag = request.form['flag']
             correct = True if answer == flag else False
+            temperature = str(prize["temperature"])
 
+            prize["temperature"]
             if correct:
                 outcome = f"Correct! You are eligible for £ {prize}0 off on your next booking with YeezyJet"
             else:
@@ -45,7 +47,7 @@ def outcome():
             db.session.add(answerData)
             db.session.commit()
 
-            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=prize["city"], temperature=prize["temperature"])
+            return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=prize["city"], temperature=temperature)
     return redirect(url_for('quiz'))
 
 
