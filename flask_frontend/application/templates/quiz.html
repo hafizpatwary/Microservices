@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<h2>What country does this flag belong to?</h2>
-<p>Answer to get a flight coucher with YeezyJet</p>
+<h2>Whaich country does this flag belong to?</h2>
+<p>Answer to get a flight voucher with YeezyJet</p>
 <br>
-<img src="/static/flags/{{ image }}.png">
-
+<img src="/static/flags/{{ image }}.png" border="5">
+<br>
 
 <form name="myForm" action="{{ url_for('outcome') }}" method="post">
     {% for option in options %}
