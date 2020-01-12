@@ -151,8 +151,8 @@ The breakdown of test coverage for each service is reported below with explanati
 <a name="user_sotry"></a>
 ### Project planning and user stories
 Project tracking was done using a trello board. Below the before and after of the project.
-<img src="/Documentation/trello_before.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
-<img src="/Documentation/trello_after.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/trello_before.png" alt="prize_test_cov" />
+<img src="/Documentation/trello_after.png" alt="prize_test_cov" />
 <a name="uml"></a>
 ### UML diagram
 
