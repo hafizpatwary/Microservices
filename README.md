@@ -1,7 +1,3 @@
-Presentation Link: https://docs.google.com/presentation/d/1fnFwZXLDXZT04di-YbaYPCNdkgrMjLmZ2AKxPxxrEfE/edit?usp=sharing
-
-Web application: http://35.223.251.82/
-
 
 
 # Microservices
@@ -161,7 +157,6 @@ Project tracking was done using a trello board. Below the before and after of th
 <img src="/Documentation/trello_before.png" alt="prize_test_cov" />
 <img src="/Documentation/trello_after.png" alt="prize_test_cov" />
 <a name="uml"></a>
-### UML diagram
 
 <a name="improve"></a>
 ## Improvements for the Future
