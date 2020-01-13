@@ -4,14 +4,33 @@
     <title>{{ title }}</title>
     <meta charset="utf-8">
     <style type="text/css">
-       body { background: #FFFFFF;
-              font-family: "Times New Roman", Times, serif !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+    #box {
+        margin: auto;
+        width: 40%;
+        height: 70%;
+        background-color: #D7DDDE;
+        padding: 1em 1em 2em 1em;
+    }
+    #box1 {
+    float: center;
+    width: 100%;
+    height: 100%;
+    background-color: #D7DDDE;
+    }
+    body { background: #FFFFFF;
+            background-image: url('/static/img_world.jpg');
+            font-family: monospace; }
     </style>
 
 </head>
 <body>
     <main>
+        <div>
         {% block content %}
         {% endblock %}
+        </div>
     </main>
 </body>
+
+
+

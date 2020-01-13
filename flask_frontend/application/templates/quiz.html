@@ -1,13 +1,19 @@
 {% extends "layout.html" %}
 {% block content %}
-<img src="/static/flags/{{ image }}.png">
+<div id="box">
+    <h2>Which country does this flag belong to?</h2>
+    <p>Answer to get a flight voucher with YeezyJet</p>
+    <div id="box1">
+        <img src="/static/flags/{{ image }}.png" border="2">
+        <br>
 
-
-<form name="myForm" action="{{ url_for('outcome') }}" method="post">
-    {% for option in options %}
-        <input type="radio" name="answer" value="{{ option['code'] }}"> {{ option['name'] }} </input><br>
-    {% endfor %}
-        <!--<input type="submit" name="flag" value="{{ png }}">-->
-        <button type="submit" name="flag" value="{{ png }}">Submit answer</button>
-</form>
+        <form name="myForm" action="{{ url_for('outcome') }}" method="post">
+            {% for option in options %}
+                <input type="radio" name="answer" value="{{ option['code'] }}"> {{ option['name'] }} </input><br>
+            {% endfor %}
+                <br>
+                <button type="submit" name="flag" value="{{ png }}">Submit answer</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

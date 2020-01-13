@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-
+<div id="box" align="left">
 <form method="POST" action="">
     {{ form.hidden_tag() }}
     <legend>Retrieve price</legend>
+    <br>
     <div class="form-group">
         {{ form.email.label }}
         {% if form.email.errors %}

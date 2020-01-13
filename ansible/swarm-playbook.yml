@@ -1,0 +1,125 @@
+- hosts: swarm 
+  become: true
+  tasks:
+
+###################### Installing Docker  ############################
+
+    - name: Install required system packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop: ['git','python-pip','apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common', 'python3-pip']
+
+
+    - name: Getting Docker GPG Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Adding Docker repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+        update_cache: yes
+
+    - name: Installing Docker
+      apt:
+        name: "{{ item }}"
+        state: latest
+      loop: ['docker-ce','docker-ce-cli','containerd.io']
+
+    - name: Install jsondiff (required for stack deply)
+      pip:
+        name: jsondiff
+
+###################### Setting up Jenkins user  ############################
+
+    - name: Create jenkins user
+      user:
+        name: jenkins
+        shell: /bin/bash
+
+    - name: add jenkins to sudoers
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        line: "jenkins ALL=(ALL:ALL) NOPASSWD:ALL"
+
+    - name: Adding Jenkins user to Docker group
+      user:
+        name: jenkins
+        append: yes
+        groups: docker
+
+    - name: Installing docker module
+      pip:
+        name: docker
+
+    - name: "Installing docker-compose"
+      pip:
+        name: docker-compose
+        state: present
+
+    - name: Setting Enviornment
+      copy:
+        src: ~/.bashrc
+        dest: /home/jenkins/.bashrc
+
+###################### Docker daemon adding file  ############################
+
+    - name: 
+      copy:
+        dest: /etc/docker/daemon.json
+        content: '{"insecure-registries" : ["jenkins:5000"]}'
+
+    - name: Realod Docker
+      systemd:
+        name: docker
+        state: reloaded
+###################### Adding SSH keyes  ############################
+
+    - name: "ssh folder"
+      file:
+        path: /home/jenkins/.ssh
+        state: directory
+        mode: "0700"
+        owner: jenkins
+        group: jenkins
+    - name: "install public key"
+      copy:
+        src: ~/.ssh/ansible_id_rsa.pub
+        dest: /home/jenkins/.ssh/authorized_keys
+        owner: jenkins
+        group: jenkins
+        mode: u=rw,g=,o=
+
+###################### Getting Git repository  ############################
+    - name: Git clone project
+      become_user: jenkins
+      git:
+        repo: "https://github.com/hafizpatwary/microservices.git"
+        dest: ~/microservices
+        update: yes
+
+
+    - name: Setting initial BUILD_NUMBER
+      become_user: jenkins
+      lineinfile:
+        path: ~/.bashrc
+        state: present
+        insertbefore: "# If not running interactively, don't do anything"
+        line: "export BUILD_NUMBER=0"
+
+    - name: Init a swarm with default parameters
+      docker_swarm:
+        state: present
+
+    - name: docker stack deploy
+      become_user: jenkins
+      docker_stack:
+        name: microservices
+        state: present
+        compose:
+        - ~/microservices/docker-compose.yaml
+

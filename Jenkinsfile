@@ -12,7 +12,6 @@ pipeline{
             }
         }
 
-
         stage('Deploy Services'){
             steps{
                 sh '''ssh -o StrictHostKeyChecking=no swarm << BOB
@@ -24,6 +23,5 @@ pipeline{
                         '''
             }
         }
-
     }
 }

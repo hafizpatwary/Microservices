@@ -1,0 +1,145 @@
+---
+- hosts: jenkins
+  become: true
+  
+  tasks:
+###################### Install Jenkins  ############################
+#    - name: Creating Jenkins user
+#      user:
+#        name: jenkins
+#        shell: /bin/bash
+
+    - name: Installing Java and Curl
+      apt:
+        name: openjdk-8-jdk
+        state: latest
+        update_cache: yes
+      
+    - name: Getting Jenkins GPG Key
+      apt_key:
+        url: https://pkg.jenkins.io/debian/jenkins.io.key
+        state: present
+        
+    - name: Adding Jenkins repository
+      apt_repository:
+        repo: deb http://pkg.jenkins.io/debian-stable binary/
+        state: present
+        update_cache: yes
+        
+    - name: Installing Jenkins
+      apt:
+        name: jenkins
+        state: latest
+        
+    - name: Starting Jenkins
+      systemd:
+        state: started
+        enabled: yes
+        name: jenkins
+
+###################### Set keyes ############################
+    - name: ssh folder
+      file:
+        path: /home/jenkins/.ssh
+        state: directory
+        mode: "0700"
+        owner: jenkins
+        group: jenkins
+
+    - name: Install private key
+      copy:
+        src: ~/.ssh/ansible_id_rsa
+        dest: /home/jenkins/.ssh/id_rsa
+        owner: jenkins
+        group: jenkins
+        mode: u=rw,g=,o=
+
+###################### Install Dokcer ############################
+    - name: Install required system packages
+      apt:
+        name: "{{ item }}"
+        state: latest
+        update_cache: yes
+      loop: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg-agent', 'software-properties-common', 'python3-pip', 'python-pip']
+
+    - name: Getting Docker GPG Key
+      apt_key:
+        url: "https://download.docker.com/linux/debian/gpg"
+        state: present
+
+    - name: Adding Docker repository
+      apt_repository:
+        repo: "deb https://download.docker.com/linux/debian stretch stable"
+        state: present
+        update_cache: yes
+
+    - name: Installing Docker
+      apt:
+        name: "{{ item }}"
+        state: latest
+      loop: ['docker-ce','docker-ce-cli','containerd.io']
+
+    - name: Adding current user to Docker group
+      user:
+        name: jenkins
+        append: yes
+        groups: docker
+
+    - name: Installing docker module
+      pip:
+        name: docker
+
+###################### Container Registry ############################ 
+    - name: "Docker registry container"
+      docker_container:
+        name: registry
+        image: registry
+        ports:
+        - "5000:5000"
+        volumes:
+        - registry-volume:/var/lib/registry
+        restart_policy: always
+
+###################### Installing Docker-Compose ############################
+    - name: "Installing docker-compose"
+      pip:
+        name: docker-compose  
+
+###################### Environment Variables ############################
+    - name: Setting Enviornment
+      copy:
+        src: ~/.bashrc
+        dest: /home/jenkins/.bashrc
+
+###################### Docker daemon adding file  ############################
+    - name: 
+      copy:
+        dest: /etc/docker/daemon.json
+        content: '{"insecure-registries" : ["{{ inventory_hostname }}:5000"]}'
+
+    - name: Realod Docker
+      systemd:
+        name: docker
+        state: reloaded
+
+    - name: Restart Jenkins
+      systemd:
+        name: jenkins.service
+        state: restarted
+    - name: "Initial admin password: "
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: initpassword
+    - debug:
+        msg: "{{ initpassword.stdout }}"
+
+
+
+
+
+
+
+
+
+
+
+
