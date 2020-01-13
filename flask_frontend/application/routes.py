@@ -17,7 +17,31 @@ def quiz():
 
             return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_options)
     except:
-        return "Loading..."
+        quiz = {
+        "options": [
+        {
+        "code": "ZA",
+        "name": "South Africa"
+        },
+        {
+        "code": "TG",
+        "name": "Togo"
+        },
+        {
+        "code": "YE",
+        "name": "Yemen"
+        },
+        {
+        "code": "NL",
+        "name": "Netherlands"
+        }
+        ],
+        "image": "YE"
+        }
+        image = quiz['image']
+        quiz_options = quiz['options']
+        
+        return render_template("quiz.html", title="quiz", image=image.lower(), png=image, options=quiz_options)
 
 
 
