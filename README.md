@@ -58,7 +58,7 @@ af5dfccc0a06        jenkins:5000/temperature_service:build-   "/usr/local/bin/py
 ```
 #### Check web application working
 Open your browser and go on http://localhost:80
-Or to check in terminal
+or to check if website is up in terminal with:
 ```bash
 $ curl localhost
 ```
