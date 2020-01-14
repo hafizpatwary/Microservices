@@ -28,7 +28,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_IP=${MYSQL_IP}
       - SECRET_KEY=${SECRET_KEY}
-
+      - MYSQL_DB=${MYSQL_DB}
   prize:
     image: jenkins:5000/prize_service:build-${BUILD_NUMBER}
     build: ./flask_prize/
