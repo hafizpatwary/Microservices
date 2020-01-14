@@ -1,3 +1,47 @@
+# YeezyJet Country Quiz
+A flag quiz, that rewards the user with a 'voucher' for a plane ticket.
+
+### Prerequisites
+- [Git ](https://git-scm.com/downloads)
+- [Docker](https://docs.docker.com/docker-for-windows/install/)
+- Docker Compose (Will already be installed if you are using MacOS or Windows) click here for [Linux](https://docs.docker.com/compose/install/)
+
+#### Requisites for application
+- In order for the application to work you require an API key from [openweathermap](https://openweathermap.org/), it is free to sign up and the service used for this application is free. **Important**: Do not upload your API key online.
+- A MySQL instance with a database set up
+
+### Setup
+Open up a terminal and run the commands shown below to get setup.
+
+#### Clone the Repository
+```bash
+git https://github.com/hafizpatwary/microservices
+cd microservices
+```
+
+#### Configure MySQL database
+Note: SECRET_KEY can be set to any arbitrary string
+```bash
+export MYSQL_USERNMAE=[<YOUR_MYSQL_USERNAME>]
+export MYSQL_PASSWORD=[<YOUR_MYSQL_PASSWORD>]
+export MYSQL_IP=[<YOUR_MYSQL_IP>]
+export MYSQL_DB=[<YOUR_MYSQL_DB>]
+export SECRET_KEY=[<YOUR_SECRET_KEY>]
+```
+#### Configure API key
+```bash
+export API_KEY=[<YOUR_API_KEY>]
+```
+#### Set up databse
+```bash
+bash db_setup.sh
+```
+
+#### Build & Run the Container
+```bash
+docker-compose up -d --build
+```
+
 
 
 # Microservices
