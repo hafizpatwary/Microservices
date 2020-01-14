@@ -15,7 +15,7 @@ Open up a terminal and run the commands shown below to get setup.
 
 #### Clone the Repository
 ```bash
-git https://github.com/hafizpatwary/microservices
+git clone https://github.com/hafizpatwary/microservices
 cd microservices
 ```
 
