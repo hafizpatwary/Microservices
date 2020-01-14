@@ -15,26 +15,26 @@ Open up a terminal and run the commands shown below to get setup.
 
 #### Clone the Repository
 ```bash
-git clone https://github.com/hafizpatwary/microservices
-cd microservices
+$ git clone https://github.com/hafizpatwary/microservices
+$ cd microservices
 ```
 
 #### Configure MySQL database
 Note: SECRET_KEY can be set to any arbitrary string
 ```bash
-export MYSQL_USERNMAE=[<YOUR_MYSQL_USERNAME>]
-export MYSQL_PASSWORD=[<YOUR_MYSQL_PASSWORD>]
-export MYSQL_IP=[<YOUR_MYSQL_IP>]
-export MYSQL_DB=[<YOUR_MYSQL_DB>]
-export SECRET_KEY=[<YOUR_SECRET_KEY>]
+$ export MYSQL_USERNMAE=[<YOUR_MYSQL_USERNAME>]
+$ export MYSQL_PASSWORD=[<YOUR_MYSQL_PASSWORD>]
+$ export MYSQL_IP=[<YOUR_MYSQL_IP>]
+$ export MYSQL_DB=[<YOUR_MYSQL_DB>]
+$ export SECRET_KEY=[<YOUR_SECRET_KEY>]
 ```
 #### Configure API key
 ```bash
-export API_KEY=[<YOUR_API_KEY>]
+$ export API_KEY=[<YOUR_API_KEY>]
 ```
 #### Set up databse
 ```bash
-bash db_setup.sh
+$ bash db_setup.sh
 ```
 
 #### Build & Run the Container
@@ -42,8 +42,31 @@ bash db_setup.sh
 docker-compose up -d --build
 ```
 
-
-
+#### Check containers running
+Once docker-compose completes the build
+```bash
+$ docker ps -a
+```
+Output should show running containers:
+```bash
+CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS              PORTS                NAMES
+1e218274632a        nginx                                     "nginx -g 'daemon of…"   18 minutes ago      Up 18 minutes       0.0.0.0:80->80/tcp   nginx
+f7f69a48f2e9        jenkins:5000/frontend_service:build-      "/usr/local/bin/pyth…"   18 minutes ago      Up 18 minutes                            microservices_frontend_1
+ec1aedfc58d2        jenkins:5000/prize_service:build-         "/usr/local/bin/pyth…"   25 minutes ago      Up 25 minutes                            microservices_prize_1
+8b5183c4888f        jenkins:5000/countries_service:build-     "/usr/local/bin/pyth…"   25 minutes ago      Up 25 minutes                            microservices_countries_1
+af5dfccc0a06        jenkins:5000/temperature_service:build-   "/usr/local/bin/pyth…"   25 minutes ago      Up 25 minutes                            microservices_temperature_1
+```
+#### Check web application working
+Open your browser and go on http://localhost:80
+Or to check in terminal
+```bash
+$ curl localhost
+```
+#### Remove containers and images
+```bash
+$ docker-compose down
+$ docker image rm $(docker image ls -q) # !This will destroy all images stored in your machine
+```
 # Microservices
 An application that takes advantage of micro-service architecture and contenarisation
 
