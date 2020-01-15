@@ -18,10 +18,6 @@ Open up a terminal and run the commands shown below to get setup.
 $ git clone https://github.com/hafizpatwary/microservices
 $ cd microservices
 ```
-Should see this:
-<p align="center">
-  <img src="/Documentation/website.png" alt="Website Frontend" width="70%" height="70%" border="1"/>
-</p>
 
 #### Configure MySQL database
 Note: SECRET_KEY can be set to any arbitrary string
@@ -66,6 +62,11 @@ or to check if website is up in terminal with:
 ```bash
 $ curl localhost
 ```
+Should see this:
+<p align="center">
+  <img src="/Documentation/website.png" alt="Website Frontend" width="70%" height="70%" border="1"/>
+</p>
+
 #### Remove containers and images
 ```bash
 $ docker-compose down
