@@ -20,8 +20,9 @@ $ cd microservices
 ```
 Should see this:
 <p align="center">
-  <img src="/Documentation/website.png" alt="Website Frontend" />
+  <img src="/Documentation/website.png" alt="Website Frontend" width="70%" height="70%" border="1"/>
 </p>
+
 #### Configure MySQL database
 Note: SECRET_KEY can be set to any arbitrary string
 ```bash
@@ -209,16 +210,16 @@ Testing has been done using pytest. The coverage report for the services overall
 The breakdown of test coverage for each service is reported below with explanation wherever is necessary.
 ### Test for Service 2 (Contry Genarator)
 
-<img src="/Documentation/countries_test_cov.png" alt="countries_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/countries_test_cov.png" alt="countries_test_cov" width="60%" height="60%" border="5"/>
 
 ### Test for Service 3 (Temperature)
-<img src="/Documentation/temperature_api_test.png" alt="temperature_api_test" width="80%" height="80%" border="5"/>
+<img src="/Documentation/temperature_api_test.png" alt="temperature_api_test" width="60%" height="60%" border="5"/>
 
 ### Test for Service 4 (Vouhcer Generator)
-<img src="/Documentation/prize_test_cov.png" alt="prize_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/prize_test_cov.png" alt="prize_test_cov" width="60%" height="60%" border="5"/>
 
 ### Test for Service 1 (Frontend)
-<img src="/Documentation/frontend_test_cov.png" alt="frontend_test_cov" width="80%" height="80%" border="5"/>
+<img src="/Documentation/frontend_test_cov.png" alt="frontend_test_cov" width="60%" height="60%" border="5"/>
 
 
 <a name="user_sotry"></a>
