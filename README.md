@@ -19,7 +19,9 @@ $ git clone https://github.com/hafizpatwary/microservices
 $ cd microservices
 ```
 Should see this:
-<img align="center" src="/Documentation/website.png" alt="Website Frontend" />
+<p align="center">
+  <img src="/Documentation/website.png" alt="Website Frontend" />
+</p>
 #### Configure MySQL database
 Note: SECRET_KEY can be set to any arbitrary string
 ```bash
