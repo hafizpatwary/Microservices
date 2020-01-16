@@ -15,9 +15,6 @@ from application.models import Answers, Countries, Prize
 import os
 from pymysql import connect
 
-db.drop_all()
-db.create_all()
-
 connection = connect(
     host = os.getenv('MYSQL_IP'),
     user = os.getenv('MYSQL_USERNAME'),
@@ -26,12 +23,16 @@ connection = connect(
     charset = 'utf8mb4'
 )
 
-connection.cursor().execute('create database dbname')
+
 try:
     with connection.cursor() as cursor:
         cursor.execute('CREATE DATABASE IF NOT EXISTS yeezyjet')
 finally:
     connection.close()
+    
+ 
+db.drop_all()
+db.create_all()
 
 
 try:
@@ -50,5 +51,6 @@ exit()
 EOF
 
 # Retun to root of project
+deactivate
 rm -rf venv
 cd ../
