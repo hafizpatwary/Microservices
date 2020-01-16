@@ -25,7 +25,6 @@ Note: SECRET_KEY can be set to any arbitrary string
 $ export MYSQL_USERNAME=[<YOUR_MYSQL_USERNAME>]
 $ export MYSQL_PASSWORD=[<YOUR_MYSQL_PASSWORD>]
 $ export MYSQL_IP=[<YOUR_MYSQL_IP>]
-$ export MYSQL_DB=[<YOUR_MYSQL_DB>]
 $ export SECRET_KEY=[<YOUR_SECRET_KEY>]
 ```
 #### Configure API key
