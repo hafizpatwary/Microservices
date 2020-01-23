@@ -3,5 +3,5 @@
 __pycache__
 htmlcov
 .pytest_cache
-.coverage
+db_data/*
 
