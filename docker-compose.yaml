@@ -18,17 +18,12 @@ services:
   frontend:
     image: jenkins:5000/frontend_service:build-${BUILD_NUMBER}
     build: ./flask_frontend/
-    # ports:
-    #   - target: 5000
-    #     published: 80
-    #     protocol: tcp
-    #     mode: host
     environment:
-      - MYSQL_USERNAME=${MYSQL_USERNAME}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_IP=${MYSQL_IP}
-      - SECRET_KEY=${SECRET_KEY}
-      - MYSQL_DB=${MYSQL_DB}
+      - MYSQL_USERNAME=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_IP=database
+      - SECRET_KEY=cowmilkisgood
+      - MYSQL_DB=yeezyjet
   prize:
     image: jenkins:5000/prize_service:build-${BUILD_NUMBER}
     build: ./flask_prize/
@@ -45,3 +40,15 @@ services:
   countries:
     image: jenkins:5000/countries_service:build-${BUILD_NUMBER}
     build: ./flask_countries/
+
+  database:
+    image: mysql:5.7
+    volumes:
+       - ./db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: yeezyjet
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+
