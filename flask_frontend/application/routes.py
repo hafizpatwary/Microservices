@@ -8,7 +8,7 @@ import requests
 @app.route('/', methods=["GET"])
 def quiz():
     try:
-        response = requests.get('http://countries:5000')
+        response = requests.get('https://kh63xij3za.execute-api.eu-west-2.amazonaws.com/Dev/countries')
 
         if response.status_code == 200:
             quiz = response.json()
@@ -47,7 +47,7 @@ def quiz():
 
 @app.route('/outcome', methods=["GET","POST"])
 def outcome():
-    response = requests.get('http://prize:5000')
+    response = requests.get('https://kh63xij3za.execute-api.eu-west-2.amazonaws.com/Dev/prize')
 
     if 'answer' in request.form:
 
@@ -70,7 +70,7 @@ def outcome():
             db.session.commit()
 
             return render_template("outcome.html", outcome=outcome, correct=correct, prize=prize, city=response.json()["city"], temperature=response.json()["temperature"])
-    return redirect(url_for('quiz'))
+    return "Not ok" #redirect(url_for('quiz'))
 
 
 

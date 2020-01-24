@@ -3,5 +3,5 @@
 __pycache__
 htmlcov
 .pytest_cache
-db_data/*
+/db_data/*
 
