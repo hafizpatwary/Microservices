@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels: 
+    app: frontend
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: jenkins-vm:5000/frontend_service:build-${BUILD_NUMBER}
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+
+kind: Deployment
+metadata:
+  name: prize
+  labels: 
+    app: prize
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: prize
+  template:
+    metadata:
+      labels:
+        app: prize
+    spec:
+      containers:
+      - name: prize
+        image: jenkins-vm:5000/prize_service:build-${BUILD_NUMBER}
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+
+kind: Deployment
+metadata:
+  name: temperature
+  labels: 
+    app: temperature
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: temperature
+  template:
+    metadata:
+      labels:
+        app: temperature
+    spec:
+      containers:
+      - name: temperature
+        image: jenkins-vm:5000/temperature_service:build-${BUILD_NUMBER}
+        ports:
+        - containerPort: 5000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+
