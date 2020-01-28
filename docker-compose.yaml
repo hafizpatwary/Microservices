@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   frotend:
-    image: gcr.io/{PROJECT_ID}/frontend_service:build-${BUILD_NUMBER}
+    image: gcr.io/${PROJECT_ID}/frontend_service:build-${BUILD_NUMBER}
     build: ./flask_frontend/
     environment:
       - MYSQL_USERNAME=test
@@ -12,18 +12,18 @@ services:
       - MYSQL_DB=yeezyjet
 
   prize:
-    image: gcr.io/{PROJECT_ID}/prize_service:build-${BUILD_NUMBER}
+    image: gcr.io/${PROJECT_ID}/prize_service:build-${BUILD_NUMBER}
     build: ./flask_prize/
     depends_on:
       - temperature
       - countries
 
   temperature:
-    image: gcr.io/{PROJECT_ID}/temperature_service:build-${BUILD_NUMBER}
+    image: gcr.io/${PROJECT_ID}/temperature_service:build-${BUILD_NUMBER}
     build: ./flask_temperature_api/
     environment:
       - API_KEY=${API_KEY}
 
   countries:
-    image: gcr.io/{PROJECT_ID}/countries_service:build-${BUILD_NUMBER}
+    image: gcr.io/${PROJECT_ID}/countries_service:build-${BUILD_NUMBER}
     build: ./flask_countries/
