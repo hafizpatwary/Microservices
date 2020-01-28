@@ -1,38 +1,29 @@
 version: "3.7"
 
 services:
-  nginx:
-    container_name: nginx
-    image: nginx
-    ports:
-      - target: 80
-        published: 80
-    volumes:
-      - type: bind
-        source: ./nginx/nginx.conf
-        target: /etc/nginx/nginx.conf
-    depends_on:
-      - frontend
-      - prize
-
-  frontend:
-    image: jenkins:5000/frontend_service:build-${BUILD_NUMBER}
+  frotend:
+    image: gcr.io/{PROJECT_ID}/frontend_service:build-${BUILD_NUMBER}
     build: ./flask_frontend/
     environment:
+      - MYSQL_USERNAME=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_IP=database
+      - SECRET_KEY=cowmilkisgood
+      - MYSQL_DB=yeezyjet
 
   prize:
-    image: jenkins:5000/prize_service:build-${BUILD_NUMBER}
+    image: gcr.io/{PROJECT_ID}/prize_service:build-${BUILD_NUMBER}
     build: ./flask_prize/
     depends_on:
       - temperature
       - countries
 
   temperature:
-    image: jenkins:5000/temperature_service:build-${BUILD_NUMBER}
+    image: gcr.io/{PROJECT_ID}/temperature_service:build-${BUILD_NUMBER}
     build: ./flask_temperature_api/
     environment:
       - API_KEY=${API_KEY}
 
   countries:
-    image: jenkins:5000/countries_service:build-${BUILD_NUMBER}
+    image: gcr.io/{PROJECT_ID}/countries_service:build-${BUILD_NUMBER}
     build: ./flask_countries/
