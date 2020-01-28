@@ -160,7 +160,4 @@ spec:
     port: 5000
     targetPort: 5000
   type: ClusterIP
----
-apiVersion: apps/v1
-kind: Deployment
-metadata: database
+
